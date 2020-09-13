@@ -1,0 +1,9 @@
+Use the help command to find out about other commands.
+
+The command requires exactly one parameter, the command to be examined.
+
+Syntax:
+help [command]
+
+Example:
+help exit

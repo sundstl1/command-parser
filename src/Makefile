@@ -3,8 +3,8 @@ NAME=parser
 
 all: main
 
-main: main.o
-	$(CC) -o $(NAME) main.c
+main: main.o help.o commands.o
+	$(CC) -o $(NAME) main.c help.c commands.c
 
 clean:
 	rm -f $(NAME) *.o

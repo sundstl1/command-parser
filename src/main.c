@@ -1,7 +1,10 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
+
+#include "commands.h"
+#include "help.h"
 
 int spaceToNull(char* string)
 {
@@ -15,24 +18,6 @@ int spaceToNull(char* string)
     }
   }
   return subStrings;
-}
-
-int commandIdentifier(const char* command)
-{
-    const int commandListLength = 3;
-    const char* commandList[] = {
-      "exit\0 1",
-      "help\0 2",
-      "test\0 43"
-    };
-    for (int i = 0; i < commandListLength; i++)
-    {
-      if (!strcmp(command, commandList[i]))
-      {
-        return atoi(&commandList[i][strlen(commandList[i])+1]);
-      }
-    }
-    return -1;
 }
 
 void readUserInput(char * buffer, int bufferSize)
@@ -65,7 +50,10 @@ int main() {
      readUserInput(readBuffer, BUFFERSIZE);
      parameters = spaceToNull(readBuffer);
      int command = commandIdentifier(readBuffer);
-     printf("command: %d, substrings: %d\n", command, parameters);
+     if (command == 2)
+     {
+       help(&readBuffer[strlen(readBuffer)+1], parameters);
+     }
      if (command == 1)
      {
        printf("Exiting...\n");
